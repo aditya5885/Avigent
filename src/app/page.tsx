@@ -1,69 +1,98 @@
-import Image from "next/image";
+import { Hero } from "@/components/home/Hero";
+import { TrustStrip } from "@/components/home/TrustStrip";
+import { AboutIntro } from "@/components/home/AboutIntro";
+import { ServicesShowcase } from "@/components/home/ServicesShowcase";
+import { WhyChooseUs, Industries } from "@/components/home/WhyIndustries";
+import { Testimonials } from "@/components/home/Testimonials";
+import { RenewableSpotlight, CtaBanner } from "@/components/home/Spotlight";
+import { ProjectGallery } from "@/components/ProjectGallery";
+import { ContactDetails, MapEmbed } from "@/components/contact/ContactDetails";
+import { SectionHeading } from "@/components/layout/PageChrome";
+import { Button } from "@/components/ui/Button";
+import { Reveal } from "@/components/motion";
+import { pageMetadata } from "@/lib/seo";
 
-export default function Home() {
+export const metadata = pageMetadata({
+  title: "AVIGENT Technologies | Electrical Solutions, Safety Audits & Solar EPC in Kochi",
+  absoluteTitle: true,
+  description:
+    "Reliable electrical solutions, safer systems, cleaner energy. AVIGENT Technologies, Kakkanad, Kochi — electrical maintenance, safety audits, engineering consultancy and solar EPC since 2012.",
+  path: "/",
+});
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
+    <>
+      <Hero />
+      <AboutIntro />
+
+      <section aria-labelledby="services-title" className="relative overflow-hidden bg-navy-950 py-24 md:py-36">
+        <div className="bg-grid pointer-events-none absolute inset-0 opacity-50" aria-hidden="true" />
+        <div className="container-x relative">
+          <div className="mb-16 flex flex-col justify-between gap-8 md:mb-20 lg:flex-row lg:items-end">
+            <SectionHeading
+              eyebrow="Our services"
+              title={
+                <span id="services-title">
+                  Complete electrical capability, <span className="text-gradient">one accountable partner.</span>
+                </span>
+              }
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <Reveal>
+              <Button href="/services" variant="secondary">
+                All services
+              </Button>
+            </Reveal>
+          </div>
+          <ServicesShowcase />
         </div>
-      </main>
-    </div>
+      </section>
+
+      <TrustStrip />
+      <WhyChooseUs />
+      <Industries />
+
+      <section aria-labelledby="projects-title" className="relative bg-navy-950 py-24 md:py-36">
+        <div className="container-x">
+          <div className="mb-12 flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
+            <SectionHeading
+              eyebrow="Featured work"
+              title={<span id="projects-title">The kind of work we deliver, every day.</span>}
+              description="Explore our work by discipline — from rooftop solar to switch-room maintenance and safety audits."
+            />
+            <Reveal>
+              <Button href="/projects" variant="secondary">
+                View all projects
+              </Button>
+            </Reveal>
+          </div>
+          <ProjectGallery limit={6} idPrefix="home-gallery" />
+          <p className="mt-6 text-xs text-steel-500">Representative imagery shown.</p>
+        </div>
+      </section>
+
+      <Testimonials />
+
+      <RenewableSpotlight />
+      <CtaBanner />
+
+      <section aria-labelledby="contact-title" className="relative bg-navy-950 pb-24 md:pb-36">
+        <div className="container-x grid gap-12 lg:grid-cols-2 lg:gap-16">
+          <div>
+            <SectionHeading
+              eyebrow="Contact"
+              title={<span id="contact-title">Talk to our engineers in Kochi.</span>}
+              description="Call, WhatsApp, email or visit our Kakkanad office — we're ready to help with your next requirement."
+            />
+            <Reveal className="mt-10">
+              <ContactDetails />
+            </Reveal>
+          </div>
+          <Reveal delay={0.1} className="min-h-[24rem]">
+            <MapEmbed className="h-full min-h-[24rem]" />
+          </Reveal>
+        </div>
+      </section>
+    </>
   );
 }
